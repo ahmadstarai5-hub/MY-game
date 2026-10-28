@@ -1,1085 +1,814 @@
-From: <Saved by Blink>
-Snapshot-Content-Location: data:text/html, <html contenteditable>
-Subject: 
-Date: Wed, 28 Oct 2026 00:08:21 GMT
-MIME-Version: 1.0
-Content-Type: multipart/related;
-	type="text/html";
-	boundary="----MultipartBoundary--qiRIS8S0Ct8PrAHa3tr9jw5wxwS1Awt71llXI8AWMw----"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAS NEON APEX: 3D First-Person Flappy Bird AAA</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; }
+        #canvas-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        /* UI HUD Overlay */
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; padding: 20px; }
+        .interactive { pointer-events: auto; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 10, 20, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 16px; padding: 14px 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); }
+        .hud-group { display: flex; gap: 24px; align-items: center; }
+        .hud-item { display: flex; flex-direction: column; align-items: center; }
+        .hud-label { font-size: 10px; color: #8892b0; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 2px; }
+        .hud-value { font-size: 22px; color: #fff; font-weight: 900; text-shadow: 0 0 10px rgba(0,255,255,0.6); }
+        .coin-val { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.6); }
 
+        .hud-actions { display: flex; gap: 12px; }
+        .btn { background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); border: none; color: #000; font-weight: 800; padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(0,242,254,0.4); text-transform: uppercase; letter-spacing: 1px; font-size: 13px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,242,254,0.7); background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .btn-secondary { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; box-shadow: none; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgba(255,255,255,0.2); }
 
-------MultipartBoundary--qiRIS8S0Ct8PrAHa3tr9jw5wxwS1Awt71llXI8AWMw----
-Content-Type: text/html
-Content-ID: <frame-AC38DB26A0070906E3EB84FF0F0E56E1@mhtml.blink>
-Content-Transfer-Encoding: quoted-printable
-Content-Location: data:text/html, <html contenteditable>
+        /* Progress Bar */
+        #progress-container { width: 100%; background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        #progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg, #00f2fe, #764ba2, #ff007f); transition: width 0.1s linear; }
 
-<html contenteditable=3D""><head><meta http-equiv=3D"Content-Type" content=
-=3D"text/html; charset=3Dwindows-1252"></head><body><div>&lt;!DOCTYPE html&=
-gt;</div><div>&lt;html lang=3D"en"&gt;</div><div>&lt;head&gt;</div><div>&nb=
-sp; &nbsp; &lt;meta charset=3D"UTF-8"&gt;</div><div>&nbsp; &nbsp; &lt;meta =
-name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1.0"&gt;=
-</div><div>&nbsp; &nbsp; &lt;title&gt;AAS NEON APEX: 3D First-Person Flappy=
- Bird AAA&lt;/title&gt;</div><div>&nbsp; &nbsp; &lt;style&gt;</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; * { box-sizing: border-box; margin: 0; padding: 0;=
- }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; body, html { width: 100%; height: =
-100%; overflow: hidden; background: #000; font-family: 'Segoe UI', Tahoma, =
-Geneva, Verdana, sans-serif; user-select: none; }</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; #canvas-container { width: 100%; height: 100%; position: absol=
-ute; top: 0; left: 0; z-index: 1; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp;&n=
-bsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; /* UI HUD Overlay */</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; #ui-layer { position: absolute; top: 0; left: 0;=
- width: 100%; height: 100%; z-index: 10; pointer-events: none; display: fle=
-x; flex-direction: column; justify-content: space-between; padding: 20px; }=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .interactive { pointer-events: auto;=
- }</div><div>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div><div>&nbsp; &nbsp; &nbs=
-p; &nbsp; header { display: flex; justify-content: space-between; align-ite=
-ms: center; background: rgba(10, 10, 20, 0.75); backdrop-filter: blur(12px)=
-; border: 1px solid rgba(0, 255, 255, 0.2); border-radius: 16px; padding: 1=
-4px 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.6); }</div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; .hud-group { display: flex; gap: 24px; align-items: center; =
-}</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .hud-item { display: flex; flex-dir=
-ection: column; align-items: center; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; .hud-label { font-size: 10px; color: #8892b0; letter-spacing: 1.5px; text=
--transform: uppercase; font-weight: 700; margin-bottom: 2px; }</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; .hud-value { font-size: 22px; color: #fff; font-w=
-eight: 900; text-shadow: 0 0 10px rgba(0,255,255,0.6); }</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; .coin-val { color: #ffd700; text-shadow: 0 0 10px rgba(=
-255,215,0,0.6); }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; .hud=
--actions { display: flex; gap: 12px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; .btn { background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); bor=
-der: none; color: #000; font-weight: 800; padding: 10px 20px; border-radius=
-: 10px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 15px =
-rgba(0,242,254,0.4); text-transform: uppercase; letter-spacing: 1px; font-s=
-ize: 13px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .btn:hover { transform: =
-translateY(-2px); box-shadow: 0 6px 20px rgba(0,242,254,0.7); background: l=
-inear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }</div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; .btn-secondary { background: rgba(255,255,255,0.1); border: =
-1px solid rgba(255,255,255,0.2); color: #fff; box-shadow: none; }</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; .btn-secondary:hover { background: rgba(255,25=
-5,255,0.2); border-color: rgba(255,255,255,0.4); box-shadow: 0 4px 15px rgb=
-a(255,255,255,0.2); }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-/* Progress Bar */</div><div>&nbsp; &nbsp; &nbsp; &nbsp; #progress-containe=
-r { width: 100%; background: rgba(255,255,255,0.1); height: 6px; border-rad=
-ius: 3px; overflow: hidden; margin-top: 10px; border: 1px solid rgba(255,25=
-5,255,0.1); }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; #progress-bar { width: =
-0%; height: 100%; background: linear-gradient(90deg, #00f2fe, #764ba2, #ff0=
-07f); transition: width 0.1s linear; }</div><div><br></div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; /* In-Game Boost Bar */</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; #boost-hud { display: flex; gap: 12px; align-self: center; background: =
-rgba(10,10,20,0.8); padding: 10px 20px; border-radius: 14px; border: 1px so=
-lid rgba(255,255,255,0.15); backdrop-filter: blur(10px); }</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; .boost-icon-btn { position: relative; background: rgb=
-a(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius=
-: 10px; width: 48px; height: 48px; display: flex; flex-direction: column; a=
-lign-items: center; justify-content: center; cursor: pointer; transition: a=
-ll 0.2s; color: #fff; font-size: 16px; font-weight: 800; }</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; .boost-icon-btn:hover { background: rgba(0,242,254,0.=
-2); border-color: #00f2fe; transform: scale(1.05); }</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; .boost-icon-btn span { font-size: 9px; color: #aaa; margin-=
-top: 2px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .boost-count { position: =
-absolute; top: -6px; right: -6px; background: #ff007f; color: #fff; font-si=
-ze: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; ali=
-gn-items: center; justify-content: center; font-weight: 900; box-shadow: 0 =
-2px 6px rgba(0,0,0,0.5); }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; /* Mobile Touch Controls */</div><div>&nbsp; &nbsp; &nbsp; &nbsp; #mob=
-ile-controls { display: none; position: absolute; bottom: 20px; left: 0; wi=
-dth: 100%; justify-content: space-between; padding: 0 30px; pointer-events:=
- none; z-index: 12; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .mobile-steerin=
-g { display: flex; gap: 15px; pointer-events: auto; }</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; .steer-btn { width: 70px; height: 70px; background: rgba(2=
-55,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 5=
-0%; color: #fff; font-size: 26px; display: flex; align-items: center; justi=
-fy-content: center; backdrop-filter: blur(6px); user-select: none; }</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; .steer-btn:active { background: rgba(0,242,=
-254,0.4); border-color: #00f2fe; transform: scale(0.95); }</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; .mobile-flap-btn { width: 90px; height: 90px; backgro=
-und: linear-gradient(135deg, rgba(0,242,254,0.4), rgba(76,175,80,0.4)); bor=
-der: 3px solid #00f2fe; border-radius: 50%; color: #fff; font-size: 16px; f=
-ont-weight: 900; display: flex; align-items: center; justify-content: cente=
-r; backdrop-filter: blur(6px); pointer-events: auto; box-shadow: 0 0 20px r=
-gba(0,242,254,0.5); text-transform: uppercase; }</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; .mobile-flap-btn:active { transform: scale(0.95); background: l=
-inear-gradient(135deg, rgba(0,242,254,0.7), rgba(76,175,80,0.7)); }</div><d=
-iv><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; @media (max-width: 900px) { #=
-mobile-controls { display: flex; } }</div><div><br></div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; /* Modals &amp; Menus */</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; heigh=
-t: 100%; background: rgba(5, 5, 10, 0.85); backdrop-filter: blur(20px); z-i=
-ndex: 100; display: flex; align-items: center; justify-content: center; opa=
-city: 1; transition: opacity 0.3s ease; }</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; .modal-overlay.hidden { opacity: 0; pointer-events: none; }</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; .modal-card { background: linear-gradient(145de=
-g, rgba(20,20,35,0.9), rgba(10,10,20,0.95)); border: 1px solid rgba(0,255,2=
-55,0.25); border-radius: 24px; width: 90%; max-width: 650px; max-height: 85=
-vh; overflow-y: auto; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.8=
-), 0 0 40px rgba(0,242,254,0.15); display: flex; flex-direction: column; al=
-ign-items: center; text-align: center; }</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp;&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; h1.title { font-size: 44px;=
- font-weight: 900; background: linear-gradient(135deg, #00f2fe 0%, #4facfe =
-50%, #ff007f 100%); -webkit-background-clip: text; -webkit-text-fill-color:=
- transparent; margin-bottom: 10px; text-transform: uppercase; letter-spacin=
-g: 2px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; p.subtitle { color: #8892b0=
-; font-size: 15px; margin-bottom: 30px; line-height: 1.5; }</div><div><br><=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; /* Shop Tabs */</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; .shop-tabs { display: flex; gap: 10px; margin-bottom: 24px=
-; width: 100%; justify-content: center; }</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(=
-255,255,255,0.1); color: #8892b0; padding: 10px 18px; border-radius: 10px; =
-font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 12px; }=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .tab-btn.active { background: rgba(0=
-,242,254,0.15); border-color: #00f2fe; color: #00f2fe; box-shadow: 0 0 15px=
- rgba(0,242,254,0.2); }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1=
-4px; width: 100%; margin-bottom: 30px; max-height: 340px; overflow-y: auto;=
- padding-right: 6px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .shop-card { b=
-ackground: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);=
- border-radius: 14px; padding: 16px; display: flex; flex-direction: column;=
- align-items: center; justify-content: space-between; transition: all 0.2s;=
- position: relative; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .shop-card:hov=
-er { border-color: rgba(0,242,254,0.5); background: rgba(255,255,255,0.07);=
- transform: translateY(-2px); }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .shop=
--card.owned { border-color: rgba(76,175,80,0.5); background: rgba(76,175,80=
-,0.05); }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .shop-card.equipped { borde=
-r-color: #00f2fe; background: rgba(0,242,254,0.1); box-shadow: 0 0 20px rgb=
-a(0,242,254,0.3); }</div><div>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; .shop-title { font-size: 15px; font-weight: 800;=
- color: #fff; margin-bottom: 6px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .=
-shop-desc { font-size: 11px; color: #8892b0; margin-bottom: 14px; }</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; .shop-price { font-size: 13px; font-weight: =
-900; color: #ffd700; margin-bottom: 12px; }</div><div><br></div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; .instruction-grid { display: grid; grid-template-colu=
-mns: repeat(2, 1fr); gap: 14px; width: 100%; margin-bottom: 30px; text-alig=
-n: left; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .instruction-box { backgro=
-und: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); borde=
-r-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14p=
-x; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .instruction-icon { font-size: 2=
-6px; background: rgba(0,242,254,0.1); padding: 12px; border-radius: 12px; b=
-order: 1px solid rgba(0,242,254,0.3); min-width: 56px; text-align: center; =
-}</div><div>&nbsp; &nbsp; &nbsp; &nbsp; .instruction-text h4 { font-size: 1=
-3px; color: #fff; margin-bottom: 3px; font-weight: 700; }</div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; .instruction-text p { font-size: 11px; color: #8892b0;=
- line-height: 1.3; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; .=
-stats-banner { display: flex; justify-content: space-around; width: 100%; b=
-ackground: rgba(0,0,0,0.4); border-radius: 14px; padding: 18px; margin-bott=
-om: 30px; border: 1px solid rgba(255,255,255,0.08); }</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; .stat-box { display: flex; flex-direction: column; }</div>=
-<div>&nbsp; &nbsp; &nbsp; &nbsp; .stat-label { font-size: 11px; color: #889=
-2b0; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; .stat-val { font-size: 26px; font-weight=
-: 900; color: #fff; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-::-webkit-scrollbar { width: 6px; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; :=
-:-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 3px;=
- }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; ::-webkit-scrollbar-thumb { backgr=
-ound: rgba(0,242,254,0.3); border-radius: 3px; }</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; ::-webkit-scrollbar-thumb:hover { background: rgba(0,242,254,0.=
-6); }</div><div>&nbsp; &nbsp; &lt;/style&gt;</div><div>&nbsp; &nbsp; &lt;!-=
-- Three.js Library --&gt;</div><div>&nbsp; &nbsp; &lt;script src=3D"https:/=
-/cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&=
-gt;</div><div>&lt;/head&gt;</div><div>&lt;body&gt;</div><div><br></div><div=
->&nbsp; &nbsp; &lt;div id=3D"canvas-container"&gt;&lt;/div&gt;</div><div><b=
-r></div><div>&nbsp; &nbsp; &lt;!-- UI HUD --&gt;</div><div>&nbsp; &nbsp; &l=
-t;div id=3D"ui-layer"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;header =
-class=3D"interactive"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &lt;div class=3D"hud-group"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"hud-item"&gt;</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span clas=
-s=3D"hud-label"&gt;Score&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"score-val" class=
-=3D"hud-value"&gt;0&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"hud-item"&gt;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span cl=
-ass=3D"hud-label"&gt;Best&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"best-val" class=
-=3D"hud-value"&gt;0&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"hud-item"&gt;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span cl=
-ass=3D"hud-label"&gt;Coins&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"coin-val" class=
-=3D"hud-value coin-val"&gt;0&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp;&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;=
-div style=3D"width: 220px;"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &lt;div style=3D"display: flex; justify-content: spa=
-ce-between; font-size: 11px; font-weight: 700; color: #8892b0; margin-botto=
-m: 4px;"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &lt;span&gt;FLIGHT PATH&lt;/span&gt;</div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"=
-progress-pct"&gt;0%&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div id=3D"progress-container"&gt;&lt;div id=
-=3D"progress-bar"&gt;&lt;/div&gt;&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"hud-actions"&gt;</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"bt=
-n btn-secondary" onclick=3D"openShop()"&gt;&#128717;&#65039; Shop&lt;/butto=
-n&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt=
-;button class=3D"btn btn-secondary" onclick=3D"togglePOV()" id=3D"pov-btn"&=
-gt;&#127909; 1st Person&lt;/button&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"btn btn-secondary" onclic=
-k=3D"togglePause()" id=3D"pause-btn"&gt;&#9208;&#65039;&lt;/button&gt;</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &lt;/header&gt;</div><div><br></div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &lt;!-- In-Game Boost Bar --&gt;</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &lt;div id=3D"boost-hud" class=3D"interactive"&gt;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"boost-icon-btn" =
-onclick=3D"activateBoost('speed')" title=3D"Speed Surge"&gt;</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#128640;</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"b-speed=
--count" class=3D"boost-count"&gt;0&lt;/span&gt;</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;[1]&lt;/span&gt;</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"boost-icon-btn" onclick=
-=3D"activateBoost('shield')" title=3D"Energy Shield"&gt;</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#128737;&#65039;</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"b-s=
-hield-count" class=3D"boost-count"&gt;0&lt;/span&gt;</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;[2]&lt;/span&gt;</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"boost-icon-btn" on=
-click=3D"activateBoost('coins')" title=3D"Double Coins"&gt;</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#129689;2x</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"b-coin=
-s-count" class=3D"boost-count"&gt;0&lt;/span&gt;</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;[3]&lt;/span&gt;</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &lt;!-- Mobile Steering &amp; Flap Controls --&gt;</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &lt;div id=3D"mobile-controls"&gt;</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"mobile-steering"&gt=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div=
- class=3D"steer-btn" id=3D"btn-left"&gt;&#9664;&lt;/div&gt;</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"steer-b=
-tn" id=3D"btn-right"&gt;&#9654;&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &lt;div class=3D"mobile-flap-btn" id=3D"btn-flap"&gt;FLAP&lt;/di=
-v&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &=
-nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &lt;!-- Main Menu=
- Modal --&gt;</div><div>&nbsp; &nbsp; &lt;div id=3D"menu-modal" class=3D"mo=
-dal-overlay interactive"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div =
-class=3D"modal-card"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &lt;h1 class=3D"title"&gt;AAS Neon Apex&lt;/h1&gt;</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p class=3D"subtitle"&gt;3D First-Person F=
-lappy Bird AAA Edition. Navigate the cyber conduit, dodge moving obstacles,=
- choose the safe green rings, and unleash boosts!&lt;/p&gt;</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &lt;div class=3D"instruction-grid"&gt;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"instruct=
-ion-box"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &lt;div class=3D"instruction-icon"&gt;&#128640;&lt;/div&g=
-t;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &lt;div class=3D"instruction-text"&gt;</div><div>&nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt=
-;Flap &amp; Steer&lt;/h4&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Space / Click to f=
-lap. A / D or Left / Right arrows to steer smoothly.&lt;/p&gt;</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/di=
-v&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt=
-;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &lt;div class=3D"instruction-box"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"instruction-ic=
-on"&gt;&#128994;&#128308;&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"instruction-tex=
-t"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Split Gates&lt;/h4&gt;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &lt;p&gt;Fly through Green rings for points. Avoid Red rings=97they mean=
- instant death!&lt;/p&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"instruction-box"&gt=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &lt;div class=3D"instruction-icon"&gt;&#9889;&lt;/div&gt;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;d=
-iv class=3D"instruction-text"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h4&gt;Boost Armory=
-&lt;/h4&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Stock up on Speed, Shield &amp; 2x =
-Coins before launching. Press 1, 2, 3 in-game.&lt;/p&gt;</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;<=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&=
-gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;d=
-iv class=3D"instruction-box"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"instruction-icon"&gt=
-;&#127909;&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"instruction-text"&gt;</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &lt;h4&gt;Cockpit POV&lt;/h4&gt;</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Exp=
-erience ultra-immersive 1st-person flight or toggle 3rd person with [V].&lt=
-;/p&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &lt;div style=3D"display: flex; gap: 16px; width: 100%;"&gt;</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button =
-class=3D"btn" style=3D"flex: 2; padding: 16px; font-size: 16px;" onclick=3D=
-"startGame()"&gt;&#128640; Launch Mission&lt;/button&gt;</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"btn btn=
--secondary" style=3D"flex: 1; padding: 16px; font-size: 16px;" onclick=3D"o=
-penShop()"&gt;&#128717;&#65039; Shop &amp; Boosts&lt;/button&gt;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &lt;/div&gt;</div><d=
-iv><br></div><div>&nbsp; &nbsp; &lt;!-- Shop Modal --&gt;</div><div>&nbsp; =
-&nbsp; &lt;div id=3D"shop-modal" class=3D"modal-overlay hidden interactive"=
-&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"modal-card"&gt;=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h1 class=3D"title"=
- style=3D"font-size: 32px;"&gt;Cyber Armory &amp; Shop&lt;/h1&gt;</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p class=3D"subtitle"&gt;Equi=
-p ring themes, unlock 10 world backgrounds, and stock up on consumable boos=
-ts!&lt;/p&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-tabs=
-"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt=
-;button class=3D"tab-btn active" onclick=3D"switchShopTab('rings')" id=3D"t=
-ab-rings"&gt;&#127912; Ring Themes&lt;/button&gt;</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"tab-btn" oncli=
-ck=3D"switchShopTab('worlds')" id=3D"tab-worlds"&gt;&#127756; Worlds (10)&l=
-t;/button&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &lt;button class=3D"tab-btn" onclick=3D"switchShopTab('boosts')" id=3D=
-"tab-boosts"&gt;&#9889; Boosts&lt;/button&gt;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &lt;div id=3D"shop-content" class=3D"shop-grid"=
-&gt;&lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &lt;button class=3D"btn btn-secondary" style=3D"width: 100%; paddi=
-ng: 14px;" onclick=3D"closeShop()"&gt;Back to Menu&lt;/button&gt;</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &lt;/div&=
-gt;</div><div><br></div><div>&nbsp; &nbsp; &lt;!-- Pause Modal --&gt;</div>=
-<div>&nbsp; &nbsp; &lt;div id=3D"pause-modal" class=3D"modal-overlay hidden=
- interactive"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"mo=
-dal-card" style=3D"max-width: 450px;"&gt;</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &lt;h1 class=3D"title" style=3D"font-size: 32px;"&gt;Gam=
-e Paused&lt;/h1&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt=
-;p class=3D"subtitle"&gt;Take a breather, pilot.&lt;/p&gt;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div style=3D"display: flex; flex-di=
-rection: column; gap: 12px; width: 100%;"&gt;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"btn" style=3D"padd=
-ing: 14px;" onclick=3D"togglePause()"&gt;Resume Flight&lt;/button&gt;</div>=
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button cla=
-ss=3D"btn btn-secondary" style=3D"padding: 14px;" onclick=3D"returnToMenu()=
-"&gt;Main Menu&lt;/button&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div=
-><div>&nbsp; &nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &lt=
-;!-- Game Over Modal --&gt;</div><div>&nbsp; &nbsp; &lt;div id=3D"gameover-=
-modal" class=3D"modal-overlay hidden interactive"&gt;</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; &lt;div class=3D"modal-card" style=3D"max-width: 500px;"&g=
-t;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h1 class=3D"titl=
-e" style=3D"font-size: 36px; color: #ff007f; -webkit-text-fill-color: #ff00=
-7f;"&gt;Crash Detected&lt;/h1&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &lt;p class=3D"subtitle" style=3D"font-size: 16px; color: #fff; =
-margin-bottom: 20px;"&gt;Your luck might be better next time! &#128540;&#12=
-7808;&lt;/p&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</=
-div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"stats-b=
-anner"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &lt;div class=3D"stat-box"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=3D"stat-label"&gt;Fina=
-l Score&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"go-score" class=3D"stat-val"&gt;0&=
-lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &lt;div class=3D"stat-box"&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span class=3D"stat-label"&g=
-t;Coins Earned&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span id=3D"go-coins" class=3D"stat-val=
- coin-val"&gt;+0&lt;/span&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &lt;div style=3D"display: flex; gap: 14px; width: 100%;"&gt=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;but=
-ton class=3D"btn" style=3D"flex: 1; padding: 16px;" onclick=3D"startGame()"=
-&gt;&#128260; Retry Flight&lt;/button&gt;</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"btn btn-secondary" sty=
-le=3D"flex: 1; padding: 16px;" onclick=3D"returnToMenu()"&gt;&#127968; Menu=
-&lt;/button&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/di=
-v&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &=
-nbsp; &lt;/div&gt;</div><div><br></div><div>&nbsp; &nbsp; &lt;script&gt;</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; let audioCtx =3D null;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; function initAudio() {</div><div>&nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; if (!audioCtx) audioCtx =3D new (window.AudioContext =
-|| window.webkitAudioContext)();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; function playSound(type) {</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!audioCtx) return;</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let osc =3D audioCtx.createOscillator(=
-);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let ga=
-in =3D audioCtx.createGain();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; osc.connect(gain);</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; gain.connect(audioCtx.destination);</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let now =3D audio=
-Ctx.currentTime;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; if (type =3D=3D=3D 'flap') {</div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.type =3D 'sine=
-';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; osc.frequency.setValueAtTime(300, now);</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.frequency.exponent=
-ialRampToValueAtTime(600, now + 0.15);</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gain.gain.setValueAtTime(0.3, n=
-ow);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; gain.gain.linearRampToValueAtTime(0, now + 0.15);</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.start(=
-now);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; osc.stop(now + 0.15);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; } else if (type =3D=3D=3D 'score') {</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.type =
-=3D 'triangle';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; osc.frequency.setValueAtTime(587.33, now);</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.fr=
-equency.setValueAtTime(880, now + 0.08);</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gain.gain.setValueAtTime(0.25=
-, now);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; gain.gain.linearRampToValueAtTime(0, now + 0.25);</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.sta=
-rt(now);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; osc.stop(now + 0.25);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; } else if (type =3D=3D=3D 'crash') {</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.ty=
-pe =3D 'sawtooth';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; osc.frequency.setValueAtTime(150, now);</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.fr=
-equency.linearRampToValueAtTime(40, now + 0.5);</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gain.gain.setValueAtTi=
-me(0.4, now);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; gain.gain.linearRampToValueAtTime(0, now + 0.5);</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; os=
-c.start(now);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; osc.stop(now + 0.5);</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; } else if (type =3D=3D=3D 'buy') {</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.=
-type =3D 'sine';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; osc.frequency.setValueAtTime(523.25, now);</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.f=
-requency.setValueAtTime(659.25, now + 0.1);</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.frequency.setValueAtTi=
-me(783.99, now + 0.2);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; gain.gain.setValueAtTime(0.2, now);</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gain.g=
-ain.linearRampToValueAtTime(0, now + 0.3);</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.start(now);</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.st=
-op(now + 0.3);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; } else if (type =3D=3D=3D 'boost') {</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.type =3D 'square';</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- osc.frequency.setValueAtTime(440, now);</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.frequency.exponentialRamp=
-ToValueAtTime(880, now + 0.3);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gain.gain.setValueAtTime(0.2, now);</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; gain.gain.linearRampToValueAtTime(0, now + 0.3);</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; osc.start(now);</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; osc.stop(now + 0.3);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch=
-(e) {}</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; let gameData =3D {</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; coins: 500,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; bestScore: 0,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- equippedRing: 'cyan',</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-unlockedRings: ['cyan'],</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; equippedWorld: 1,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; unl=
-ockedWorlds: [1],</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; boost=
-s: { speed: 3, shield: 2, coins: 2 }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-};</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function saveGame()=
- {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; localStorage.setItem=
-('aas_neon_apex_save', JSON.stringify(gameData));</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; function loadGame() {<=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let saved =3D localStor=
-age.getItem('aas_neon_apex_save');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; if (saved) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; try { gameData =3D JSON.parse(saved); } catch(e){}</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; loadGame();</div><div><br>=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const ringThemes =3D [</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 'cyan', name: 'Cyber Cyan &amp=
-; Gold', price: 0, color: 0x00f2fe },</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; { id: 'pink', name: 'Hot Neon Pink', price: 150, color: 0xff=
-007f },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 'lime', n=
-ame: 'Electric Lime', price: 300, color: 0x00ff66 },</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; { id: 'amber', name: 'Cyberpunk Amber', price=
-: 450, color: 0xffaa00 },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; { id: 'violet', name: 'Royal Violet', price: 600, color: 0x9900ff },</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 'crimson', name: 'In=
-ferno Crimson', price: 800, color: 0xff2200 },</div><div>&nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; { id: 'rainbow', name: 'Prism Rainbow', price: 1200=
-, color: 0xff00ff }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; ];</div><div><br>=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const worldThemes =3D [</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 1, name: 'T1: Cyber Grid Void=
-', price: 0, fog: 0x050510, bg: 0x020208, grid: 0x00ffff, sun: 0x00f2fe },<=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 2, name: 'T2: Cri=
-mson Nebula', price: 100, fog: 0x150205, bg: 0x080103, grid: 0xff0055, sun:=
- 0xff3366 },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 3, n=
-ame: 'T3: Midnight Aurora', price: 200, fog: 0x021015, bg: 0x010508, grid: =
-0x00ffaa, sun: 0x00ffcc },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; { id: 4, name: 'T4: Sunset Synthwave', price: 300, fog: 0x150a15, bg: 0=
-x080308, grid: 0xff00ff, sun: 0xffaa00 },</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; { id: 5, name: 'T5: Emerald Matrix', price: 400, fog: 0x=
-021505, bg: 0x010802, grid: 0x00ff00, sun: 0x66ff00 },</div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 6, name: 'T6: Solar Flare Desert', pr=
-ice: 500, fog: 0x150d02, bg: 0x080501, grid: 0xff8800, sun: 0xffcc00 },</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 7, name: 'T7: Deep O=
-cean Abyss', price: 600, fog: 0x020a15, bg: 0x010308, grid: 0x0066ff, sun: =
-0x00ccff },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 8, na=
-me: 'T8: Violet Supernova', price: 700, fog: 0x100215, bg: 0x050108, grid: =
-0xd400ff, sun: 0xff00aa },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; { id: 9, name: 'T9: Neon Tokyo City', price: 800, fog: 0x101015, bg: 0x=
-06060a, grid: 0x00ffff, sun: 0xff0055 },</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; { id: 10, name: 'T10: Celestial God Rays', price: 1000, f=
-og: 0x151515, bg: 0x080808, grid: 0xffffff, sun: 0xffd700 }</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; ];</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; const boostItems =3D [</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; { id: 'speed', name: 'Speed Surge (x3)', desc: 'Instant forward burst',=
- price: 50 },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 'sh=
-ield', name: 'Energy Shield (x3)', desc: 'Absorbs one crash/red ring', pric=
-e: 75 },</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { id: 'coins',=
- name: 'Double Coins (x3)', desc: 'Multiplies coins by 2x', price: 100 }</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; ];</div><div><br></div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; let currentShopTab =3D 'rings';</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; function switchShopTab(tab) {</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; currentShopTab =3D tab;</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; document.querySelectorAll('.tab-btn').forEach(b =3D&gt;=
- b.classList.remove('active'));</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; document.getElementById('tab-' + tab).classList.add('active');</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderShop();</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; function renderShop() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; let container =3D document.getElementById('shop-content');</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; container.innerHTML =3D '';</div=
-><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (currentS=
-hopTab =3D=3D=3D 'rings') {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; ringThemes.forEach(r =3D&gt; {</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let owned =3D gameDa=
-ta.unlockedRings.includes(r.id);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let equipped =3D gameData.equippedRin=
-g =3D=3D=3D r.id;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; let card =3D document.createElement('div');</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; car=
-d.className =3D `shop-card ${owned ? 'owned' : ''} ${equipped ? 'equipped' =
-: ''}`;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; card.innerHTML =3D `</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-title"&gt;${r.name}&lt;/div&gt=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-desc"&gt;Neon Glow=
- Theme&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;d=
-iv&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-price"&gt;${o=
-wned ? (equipped ? 'EQUIPPED' : 'OWNED') : '&#129689; ' + r.price}&lt;/div&=
-gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"btn ${owned ? 'btn=
--secondary' : ''}" style=3D"padding: 8px 14px; font-size: 11px;" onclick=3D=
-"${owned ? `equipRing('${r.id}')` : `buyRing('${r.id}', ${r.price})`}"&gt;$=
-{owned ? (equipped ? 'Active' : 'Equip') : 'Unlock'}&lt;/button&gt;</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; `;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; container.appendChild(card);</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (currentShopTab =3D=3D=3D =
-'worlds') {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; worldThemes.forEach(w =3D&gt; {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let owned =3D gameData.unlockedWorl=
-ds.includes(w.id);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; let equipped =3D gameData.equippedWorld =3D=3D=3D w=
-.id;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; let card =3D document.createElement('div');</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; card.className =
-=3D `shop-card ${owned ? 'owned' : ''} ${equipped ? 'equipped' : ''}`;</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- card.innerHTML =3D `</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &lt;div class=3D"shop-title"&gt;${w.name}&lt;/div&gt;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-desc"&gt;Atmospheric Skybox &a=
-mp; Grid&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt=
-;div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-price"&gt;$=
-{owned ? (equipped ? 'EQUIPPED' : 'OWNED') : '&#129689; ' + w.price}&lt;/di=
-v&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"btn ${owned ? 'b=
-tn-secondary' : ''}" style=3D"padding: 8px 14px; font-size: 11px;" onclick=
-=3D"${owned ? `equipWorld(${w.id})` : `buyWorld(${w.id}, ${w.price})`}"&gt;=
-${owned ? (equipped ? 'Active' : 'Equip') : 'Unlock'}&lt;/button&gt;</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; `;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; container.appendChild(card);</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (currentShopTab =3D=3D=3D=
- 'boosts') {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; boostItems.forEach(b =3D&gt; {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let card =3D document.createElement=
-('div');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; card.className =3D 'shop-card';</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; card.innerHTML =3D `</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &lt;div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=
-=3D"shop-title"&gt;${b.name}&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-lt;div class=3D"shop-desc"&gt;${b.desc} (Owned: ${gameData.boosts[b.id]})&l=
-t;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div&gt;</=
-div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=3D"shop-price"&gt;&#129689; $=
-{b.price}&lt;/div&gt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;button class=3D"=
-btn" style=3D"padding: 8px 14px; font-size: 11px;" onclick=3D"buyBoost('${b=
-.id}', ${b.price})"&gt;+3 Pack&lt;/button&gt;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&g=
-t;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; `;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; container.appendChild(card);</div><div>&nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; upda=
-teHUD();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; function buyRing(id, price) {</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; initAudio();</div><div>&nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; if (gameData.coins &gt;=3D price) {</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameData.coins -=3D pric=
-e;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameDa=
-ta.unlockedRings.push(id);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; gameData.equippedRing =3D id;</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; playSound('buy');</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; saveGame();</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderShop();</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateWorldTheme();=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else { alert('Not en=
-ough coins!'); }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; function equipRing(id) {</div><div>&nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; gameData.equippedRing =3D id;</div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; saveGame();</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; renderShop();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; updateWorldTheme();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><=
-div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function buyWorld(id, price)=
- {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; initAudio();</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gameData.coins &gt;=3D pri=
-ce) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gam=
-eData.coins -=3D price;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; gameData.unlockedWorlds.push(id);</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameData.equippedWorld =3D id;</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; playSound('bu=
-y');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; save=
-Game();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; r=
-enderShop();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; updateWorldTheme();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- } else { alert('Not enough coins!'); }</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; function equipWorld(id) {</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameData.equippedWorld =3D id=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; saveGame();</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderShop();</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; updateWorldTheme();</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; fun=
-ction buyBoost(id, price) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; initAudio();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (g=
-ameData.coins &gt;=3D price) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; gameData.coins -=3D price;</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameData.boosts[id] +=3D 3;</div><d=
-iv>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; playSound('buy')=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; saveGam=
-e();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rend=
-erShop();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else { aler=
-t('Not enough coins!'); }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div=
-><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function updateHUD() {</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('coin-v=
-al').innerText =3D gameData.coins;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; document.getElementById('best-val').innerText =3D gameData.best=
-Score;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElem=
-entById('b-speed-count').innerText =3D gameData.boosts.speed;</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('b-shield-co=
-unt').innerText =3D gameData.boosts.shield;</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; document.getElementById('b-coins-count').innerText =3D=
- gameData.boosts.coins;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><=
-br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; const container =3D document.getE=
-lementById('canvas-container');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const=
- scene =3D new THREE.Scene();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const c=
-amera =3D new THREE.PerspectiveCamera(105, window.innerWidth / window.inner=
-Height, 0.1, 1000);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const renderer =
-=3D new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-perfo=
-rmance' });</div><div>&nbsp; &nbsp; &nbsp; &nbsp; renderer.setSize(window.i=
-nnerWidth, window.innerHeight);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; rende=
-rer.setPixelRatio(Math.min(window.devicePixelRatio, 2));</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; container.appendChild(renderer.domElement);</div><div><=
-br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener('resize',=
- () =3D&gt; {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; camera.as=
-pect =3D window.innerWidth / window.innerHeight;</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; camera.updateProjectionMatrix();</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; renderer.setSize(window.innerWidth, win=
-dow.innerHeight);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; });</div><div><br><=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; const ambientLight =3D new THREE.Ambi=
-entLight(0xffffff, 0.7);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; scene.add(am=
-bientLight);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const dirLight =3D new T=
-HREE.DirectionalLight(0x00f2fe, 1.5);</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- dirLight.position.set(0, 50, 20);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; sc=
-ene.add(dirLight);</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; let=
- currentWorldConfig =3D worldThemes[0];</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; let gridHelper;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; function updateWor=
-ldTheme() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let worldId=
- =3D gameData.equippedWorld;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; currentWorldConfig =3D worldThemes.find(w =3D&gt; w.id =3D=3D=3D worl=
-dId) || worldThemes[0];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- scene.background =3D new THREE.Color(currentWorldConfig.bg);</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scene.fog =3D new THREE.FogExp2(curr=
-entWorldConfig.fog, 0.015);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; dirLight.color.setHex(currentWorldConfig.sun);</div><div><br></div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gridHelper) scene.remove(gr=
-idHelper);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gridHelper =
-=3D new THREE.GridHelper(1000, 100, currentWorldConfig.grid, currentWorldCo=
-nfig.grid);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gridHelper.=
-position.y =3D -15;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sce=
-ne.add(gridHelper);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; updateWorldTheme();</div><div><br></div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; let gameState =3D 'MENU';</div><div>&nbsp; &nbsp; &nbs=
-p; &nbsp; let score =3D 0;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; let sessio=
-nCoins =3D 0;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; let flightDistance =3D =
-0;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; const totalFlightLength =3D 1000;<=
-/div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; let shipPos =3D { x: 0=
-, y: 0, z: 0 };</div><div>&nbsp; &nbsp; &nbsp; &nbsp; let shipVelocityY =3D=
- 0;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; let shipVelocityX =3D 0;</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; const gravity =3D -0.55;</div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; const flapPower =3D 0.32;</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; const forwardSpeed =3D 12.5;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; l=
-et isFirstPerson =3D true;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; let activeBoosts =3D { speed: false, shield: false, coins: false };</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; let boostTimers =3D { speed: 0, shield:=
- 0, coins: 0 };</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; let ke=
-ys =3D { left: false, right: false };</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- window.addEventListener('keydown', (e) =3D&gt; {</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; initAudio();</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; if (e.code =3D=3D=3D 'Space' || e.code =3D=3D=3D 'ArrowUp'=
-) { triggerFlap(); e.preventDefault(); }</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; if (e.code =3D=3D=3D 'KeyA' || e.code =3D=3D=3D 'ArrowLef=
-t') keys.left =3D true;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- if (e.code =3D=3D=3D 'KeyD' || e.code =3D=3D=3D 'ArrowRight') keys.right =
-=3D true;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.code =
-=3D=3D=3D 'KeyV') togglePOV();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; if (e.code =3D=3D=3D 'KeyP' || e.code =3D=3D=3D 'Escape') togglePau=
-se();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.code =3D=3D=
-=3D 'Digit1') activateBoost('speed');</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; if (e.code =3D=3D=3D 'Digit2') activateBoost('shield');</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.code =3D=3D=3D 'Digit=
-3') activateBoost('coins');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; });</div>=
-<div>&nbsp; &nbsp; &nbsp; &nbsp; window.addEventListener('keyup', (e) =3D&g=
-t; {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.code =3D=3D=
-=3D 'KeyA' || e.code =3D=3D=3D 'ArrowLeft') keys.left =3D false;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (e.code =3D=3D=3D 'KeyD' || e.=
-code =3D=3D=3D 'ArrowRight') keys.right =3D false;</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; });</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; docu=
-ment.getElementById('btn-left').addEventListener('touchstart', (e) =3D&gt; =
-{ keys.left =3D true; e.preventDefault(); });</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; document.getElementById('btn-left').addEventListener('touchend', (=
-e) =3D&gt; { keys.left =3D false; e.preventDefault(); });</div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; document.getElementById('btn-right').addEventListener(=
-'touchstart', (e) =3D&gt; { keys.right =3D true; e.preventDefault(); });</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('btn-right').ad=
-dEventListener('touchend', (e) =3D&gt; { keys.right =3D false; e.preventDef=
-ault(); });</div><div>&nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('=
-btn-flap').addEventListener('touchstart', (e) =3D&gt; { triggerFlap(); e.pr=
-eventDefault(); });</div><div>&nbsp; &nbsp; &nbsp; &nbsp; window.addEventLi=
-stener('pointerdown', (e) =3D&gt; {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; if (gameState =3D=3D=3D 'PLAYING' &amp;&amp; e.target.tagName =
-=3D=3D=3D 'CANVAS') triggerFlap();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; })=
-;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function triggerFlap=
-() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gameState !=3D=
-=3D 'PLAYING') return;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-shipVelocityY =3D flapPower;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; playSound('flap');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>=
-<br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function togglePOV() {</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; isFirstPerson =3D !isFirstPerson=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementBy=
-Id('pov-btn').innerText =3D isFirstPerson ? '&#127909; 1st Person' : '&#129=
-413; 3rd Person';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br></d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; function togglePause() {</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gameState =3D=3D=3D 'PLAYING') {<=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameState=
- =3D 'PAUSED';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; document.getElementById('pause-modal').classList.remove('hidden');</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else if (gameState =3D=
-=3D=3D 'PAUSED') {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; gameState =3D 'PLAYING';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; document.getElementById('pause-modal').classList.=
-add('hidden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; function activateBoost(type) {</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; if (gameState !=3D=3D 'PLAYING') return;</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gameData.boosts[type] &gt; 0 &amp=
-;&amp; !activeBoosts[type]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; gameData.boosts[type]--;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; activeBoosts[type] =3D true;</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; boostTimers[type] =
-=3D 300;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-playSound('boost');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; updateHUD();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; let rings =3D [];</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; const ringGeometry =3D new THREE.TorusGeometry(3.2, 0.35, 16, 64);</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- function generateCourse() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; rings.forEach(r =3D&gt; scene.remove(r.mesh));</div><div>&nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; rings =3D [];</div><div><br></div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let currentZ =3D -30;</div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; for (let i =3D 0; i &lt; totalFlightLeng=
-th; i++) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; currentZ -=3D 25;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; let isMoving =3D i &gt; 10 &amp;&amp; Math.random() &lt; 0.35;</=
-div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let isChoi=
-ce =3D i &gt; 15 &amp;&amp; Math.random() &lt; 0.3;</div><div><br></div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let activeRingThe=
-me =3D ringThemes.find(r =3D&gt; r.id =3D=3D=3D gameData.equippedRing) || r=
-ingThemes[0];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; let themeColor =3D activeRingTheme.color;</div><div><br></div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (isChoice) {</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; l=
-et leftRed =3D Math.random() &lt; 0.5;</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let matL =3D new THR=
-EE.MeshStandardMaterial({&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: leftRed ? 0xff003=
-3 : 0x00ff55,&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; emissive: leftRed ? 0xff0033 : 0x00f=
-f55,&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; emissiveIntensity: 0.8, roughness: 0.2&nbsp;<=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; });</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; let meshL =3D new THREE.Mesh(ringGeometry, matL);</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; meshL.=
-position.set(-6, (Math.random() - 0.5) * 6, currentZ);</div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scene.add(meshL=
-);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; rings.push({ mesh: meshL, x: -6, y: meshL.position.y, z: currentZ, =
-radius: 3.2, passed: false, isMoving: false, isChoice: true, isRed: leftRed=
- });</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; let matR =3D new THREE.MeshStandardMaterial({&nbsp=
-;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; color: !leftRed ? 0xff0033 : 0x00ff55,&nbsp;</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; emissive: !leftRed ? 0xff0033 : 0x00ff55,&nbsp;</div><div>&nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; emissiveIntensity: 0.8, roughness: 0.2&nbsp;</div><div>&nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div><div>&nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let meshR =3D =
-new THREE.Mesh(ringGeometry, matR);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; meshR.position.set(6, (Math.random=
-() - 0.5) * 6, currentZ);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; scene.add(meshR);</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rings.push({ mesh: me=
-shR, x: 6, y: meshR.position.y, z: currentZ, radius: 3.2, passed: false, is=
-Moving: false, isChoice: true, isRed: !leftRed });</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let mat =3D new THR=
-EE.MeshStandardMaterial({&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: themeColor, emiss=
-ive: themeColor, emissiveIntensity: 0.6, roughness: 0.2&nbsp;</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- let mesh =3D new THREE.Mesh(ringGeometry, mat);</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let posX =3D (Math.ra=
-ndom() - 0.5) * 12;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; let posY =3D (Math.random() - 0.5) * 8;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mesh.=
-position.set(posX, posY, currentZ);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; scene.add(mesh);</div><div><br></d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; rings.push({&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mesh: mesh, x: posX, y: posY, z: c=
-urrentZ, radius: 3.2, passed: false,&nbsp;</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; isMoving: isM=
-oving, moveOffset: Math.random() * Math.PI * 2, moveSpeed: 0.02 + Math.rand=
-om() * 0.03,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; isChoice: false, isRed: false</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function start=
-Game() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; initAudio();</=
-div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById(=
-'menu-modal').classList.add('hidden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; document.getElementById('gameover-modal').classList.add('hi=
-dden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getEle=
-mentById('pause-modal').classList.add('hidden');</div><div><br></div><div>&=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; score =3D 0;</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; sessionCoins =3D 0;</div><div>&nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; flightDistance =3D 0;</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; shipPos =3D { x: 0, y: 0, z: 0 };</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipVelocityY =3D 0;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipVelocityX =3D 0;</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; activeBoosts =3D { speed: false, shield: =
-false, coins: false };</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&=
-nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getEleme=
-ntById('score-val').innerText =3D '0';</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; generateCourse();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; gameState =3D 'PLAYING';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }=
-</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function returnToMenu=
-() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameState =3D 'MEN=
-U';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElement=
-ById('pause-modal').classList.add('hidden');</div><div>&nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; document.getElementById('gameover-modal').classList.a=
-dd('hidden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.=
-getElementById('menu-modal').classList.remove('hidden');</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-function triggerGameOver() {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; gameState =3D 'GAMEOVER';</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; playSound('crash');</div><div><br></div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; let finalCoins =3D sessionCoins * (activeBoosts.coins =
-? 2 : 1);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gameData.coin=
-s +=3D finalCoins;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (=
-score &gt; gameData.bestScore) gameData.bestScore =3D score;</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; saveGame();</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; updateHUD();</div><div><br></div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('go-score').innerTe=
-xt =3D score;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.=
-getElementById('go-coins').innerText =3D '+' + finalCoins;</div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('gameover-modal=
-').classList.remove('hidden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div=
-><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; function openShop() {</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('sh=
-op-modal').classList.remove('hidden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; renderShop();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div>=
-<div>&nbsp; &nbsp; &nbsp; &nbsp; function closeShop() {</div><div>&nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('shop-modal').clas=
-sList.add('hidden');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br>=
-</div><div>&nbsp; &nbsp; &nbsp; &nbsp; let clock =3D new THREE.Clock();</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; let tumbleAngle =3D 0;</div><div><br></d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; function animate() {</div><div>&nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; requestAnimationFrame(animate);</div><div=
->&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let dt =3D clock.getDelta();</di=
-v><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (gameSta=
-te =3D=3D=3D 'PLAYING') {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; let currentSpeed =3D forwardSpeed;</div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (activeBoosts.speed) {</div><=
-div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; c=
-urrentSpeed *=3D 1.8;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; boostTimers.speed--;</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (boostTimers.speed =
-&lt;=3D 0) activeBoosts.speed =3D false;</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; if (activeBoosts.shield) {</div><div>&nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; boostTimers.shield=
---;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; if (boostTimers.shield &lt;=3D 0) activeBoosts.shield =3D false;</=
-div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (activeBoosts.=
-coins) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; boostTimers.coins--;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (boostTimers.coins &lt;=3D 0) ac=
-tiveBoosts.coins =3D false;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; shipPos.z -=3D currentSpeed * dt * 3.5;</div><di=
-v>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; flightDistance +=
-=3D currentSpeed * dt * 3.5;</div><div><br></div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let pct =3D Math.min(100, Math.floor((Ma=
-th.abs(shipPos.z) / (totalFlightLength * 25)) * 100));</div><div>&nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('prog=
-ress-bar').style.width =3D pct + '%';</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('progress-pct').innerT=
-ext =3D pct + '%';</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; let steerRate =3D 14.0 * dt;</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (keys.left) {</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipVelo=
-cityX -=3D steerRate;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; } else if (keys.right) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipVelocityX +=3D steerRate;</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; shipVelocityX *=3D 0.85;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; shipVelocityX =3D Math.max(-6, Math.min(6, shipVelocityX));</di=
-v><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipPos.x +=
-=3D shipVelocityX * dt * 10;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; shipPos.x =3D Math.max(-18, Math.min(18, shipPos.x));</=
-div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; shipVelocityY +=3D gravity * dt;</div><div>&nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; shipPos.y +=3D shipVelocityY;</div><div><br></=
-div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (shipPo=
-s.y &lt; -14.5) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; if (activeBoosts.shield) {</div><div>&nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; active=
-Boosts.shield =3D false;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipPos.y =3D -13;</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; shipVelocityY =3D 0.4;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; triggerGameO=
-ver();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; let time =3D Date.now() * 0.003;</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; rings.forEach(r =3D&gt; {</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (r.i=
-sMoving) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; r.mesh.position.x =3D r.x + Math.sin(time * r=
-.moveSpeed * 50 + r.moveOffset) * 4;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div><br></div><div>&nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!r.pass=
-ed &amp;&amp; r.mesh.position.z &gt; shipPos.z + 2) {</div><div>&nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; r.=
-passed =3D true;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let dist =3D Math.hypot(shipPos.x - r.m=
-esh.position.x, shipPos.y - r.mesh.position.y);</div><div>&nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</d=
-iv><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; if (dist &lt; r.radius + 1.2) {</div><div>&nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; if (r.isChoice &amp;&amp; r.isRed) {</div><div>&nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; if (activeBoosts.shield) {</div><div>&nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; &nbsp; activeBoosts.shield =3D false;</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</div><div>&nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; triggerGameOver();</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</div><div>&nb=
-sp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; score +=3D r.isChoice ? 2 : 1;</div><div>=
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; sessionCoins +=3D r.isChoice ? 2 : 1;<=
-/div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; document.getElementById('sco=
-re-val').innerText =3D score;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; updateHUD();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; playSound('sc=
-ore');</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&n=
-bsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div>=
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</div><div>=
-<br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (=
-isFirstPerson) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; &nbsp; camera.position.set(shipPos.x, shipPos.y + 0.5, shipP=
-os.z + 1.5);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
-sp; &nbsp; &nbsp; camera.lookAt(shipPos.x + shipVelocityX * 0.2, shipPos.y =
-+ shipVelocityY * 0.5, shipPos.z - 50);</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; } else {</div><div>&nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; camera.position.set(shipPos.x,=
- shipPos.y + 4, shipPos.z + 10);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; camera.lookAt(shipPos.x, shipPos.y, s=
-hipPos.z - 20);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
-&nbsp; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- } else if (gameState =3D=3D=3D 'GAMEOVER') {</div><div>&nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tumbleAngle +=3D 0.05;</div><div>&nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; shipPos.y =3D Math.max(-=
-14.5, shipPos.y - 0.3);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
- &nbsp; &nbsp; camera.position.set(shipPos.x + Math.sin(tumbleAngle)*3, shi=
-pPos.y + 2, shipPos.z + 6);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &n=
-bsp; &nbsp; &nbsp; camera.lookAt(shipPos.x, shipPos.y, shipPos.z - 5);</div=
-><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; camera.rotati=
-on.z =3D tumbleAngle * 2;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbs=
-p; }</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ren=
-derer.render(scene, camera);</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><=
-div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp; renderShop();</div><div>&nbs=
-p; &nbsp; &nbsp; &nbsp; updateHUD();</div><div>&nbsp; &nbsp; &nbsp; &nbsp; =
-animate();</div><div>&nbsp; &nbsp; &lt;/script&gt;</div><div>&lt;/body&gt;<=
-/div><div>&lt;/html&gt;</div><div>```</div></body></html>
-------MultipartBoundary--qiRIS8S0Ct8PrAHa3tr9jw5wxwS1Awt71llXI8AWMw------
+        /* In-Game Boost Bar */
+        #boost-hud { display: flex; gap: 12px; align-self: center; background: rgba(10,10,20,0.8); padding: 10px 20px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px); }
+        .boost-icon-btn { position: relative; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; width: 48px; height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: #fff; font-size: 16px; font-weight: 800; }
+        .boost-icon-btn:hover { background: rgba(0,242,254,0.2); border-color: #00f2fe; transform: scale(1.05); }
+        .boost-icon-btn span { font-size: 9px; color: #aaa; margin-top: 2px; }
+        .boost-count { position: absolute; top: -6px; right: -6px; background: #ff007f; color: #fff; font-size: 10px; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 2px 6px rgba(0,0,0,0.5); }
+
+        /* Mobile Touch Controls */
+        #mobile-controls { display: none; position: absolute; bottom: 20px; left: 0; width: 100%; justify-content: space-between; padding: 0 30px; pointer-events: none; z-index: 12; }
+        .mobile-steering { display: flex; gap: 15px; pointer-events: auto; }
+        .steer-btn { width: 70px; height: 70px; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; color: #fff; font-size: 26px; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); user-select: none; }
+        .steer-btn:active { background: rgba(0,242,254,0.4); border-color: #00f2fe; transform: scale(0.95); }
+        .mobile-flap-btn { width: 90px; height: 90px; background: linear-gradient(135deg, rgba(0,242,254,0.4), rgba(76,175,80,0.4)); border: 3px solid #00f2fe; border-radius: 50%; color: #fff; font-size: 16px; font-weight: 900; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(6px); pointer-events: auto; box-shadow: 0 0 20px rgba(0,242,254,0.5); text-transform: uppercase; }
+        .mobile-flap-btn:active { transform: scale(0.95); background: linear-gradient(135deg, rgba(0,242,254,0.7), rgba(76,175,80,0.7)); }
+
+        @media (max-width: 900px) { #mobile-controls { display: flex; } }
+
+        /* Modals & Menus */
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 10, 0.85); backdrop-filter: blur(20px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity 0.3s ease; }
+        .modal-overlay.hidden { opacity: 0; pointer-events: none; }
+        .modal-card { background: linear-gradient(145deg, rgba(20,20,35,0.9), rgba(10,10,20,0.95)); border: 1px solid rgba(0,255,255,0.25); border-radius: 24px; width: 90%; max-width: 650px; max-height: 85vh; overflow-y: auto; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(0,242,254,0.15); display: flex; flex-direction: column; align-items: center; text-align: center; }
+        
+        h1.title { font-size: 44px; font-weight: 900; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #ff007f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        p.subtitle { color: #8892b0; font-size: 15px; margin-bottom: 30px; line-height: 1.5; }
+
+        /* Shop Tabs */
+        .shop-tabs { display: flex; gap: 10px; margin-bottom: 24px; width: 100%; justify-content: center; }
+        .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #8892b0; padding: 10px 18px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; font-size: 12px; }
+        .tab-btn.active { background: rgba(0,242,254,0.15); border-color: #00f2fe; color: #00f2fe; box-shadow: 0 0 15px rgba(0,242,254,0.2); }
+
+        .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; width: 100%; margin-bottom: 30px; max-height: 340px; overflow-y: auto; padding-right: 6px; }
+        .shop-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; transition: all 0.2s; position: relative; }
+        .shop-card:hover { border-color: rgba(0,242,254,0.5); background: rgba(255,255,255,0.07); transform: translateY(-2px); }
+        .shop-card.owned { border-color: rgba(76,175,80,0.5); background: rgba(76,175,80,0.05); }
+        .shop-card.equipped { border-color: #00f2fe; background: rgba(0,242,254,0.1); box-shadow: 0 0 20px rgba(0,242,254,0.3); }
+        
+        .shop-title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .shop-desc { font-size: 11px; color: #8892b0; margin-bottom: 14px; }
+        .shop-price { font-size: 13px; font-weight: 900; color: #ffd700; margin-bottom: 12px; }
+
+        .instruction-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; width: 100%; margin-bottom: 30px; text-align: left; }
+        .instruction-box { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; }
+        .instruction-icon { font-size: 26px; background: rgba(0,242,254,0.1); padding: 12px; border-radius: 12px; border: 1px solid rgba(0,242,254,0.3); min-width: 56px; text-align: center; }
+        .instruction-text h4 { font-size: 13px; color: #fff; margin-bottom: 3px; font-weight: 700; }
+        .instruction-text p { font-size: 11px; color: #8892b0; line-height: 1.3; }
+
+        .stats-banner { display: flex; justify-content: space-around; width: 100%; background: rgba(0,0,0,0.4); border-radius: 14px; padding: 18px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .stat-box { display: flex; flex-direction: column; }
+        .stat-label { font-size: 11px; color: #8892b0; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .stat-val { font-size: 26px; font-weight: 900; color: #fff; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,242,254,0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0,242,254,0.6); }
+    </style>
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <!-- UI HUD -->
+    <div id="ui-layer">
+        <header class="interactive">
+            <div class="hud-group">
+                <div class="hud-item">
+                    <span class="hud-label">Score</span>
+                    <span id="score-val" class="hud-value">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Best</span>
+                    <span id="best-val" class="hud-value">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">Coins</span>
+                    <span id="coin-val" class="hud-value coin-val">0</span>
+                </div>
+            </div>
+            
+            <div style="width: 220px;">
+                <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: #8892b0; margin-bottom: 4px;">
+                    <span>FLIGHT PATH</span>
+                    <span id="progress-pct">0%</span>
+                </div>
+                <div id="progress-container"><div id="progress-bar"></div></div>
+            </div>
+
+            <div class="hud-actions">
+                <button class="btn btn-secondary" onclick="openShop()">🛍️ Shop</button>
+                <button class="btn btn-secondary" onclick="togglePOV()" id="pov-btn">🎥 1st Person</button>
+                <button class="btn btn-secondary" onclick="togglePause()" id="pause-btn">⏸️</button>
+            </div>
+        </header>
+
+        <!-- In-Game Boost Bar -->
+        <div id="boost-hud" class="interactive">
+            <div class="boost-icon-btn" onclick="activateBoost('speed')" title="Speed Surge">
+                🚀
+                <span id="b-speed-count" class="boost-count">0</span>
+                <span>[1]</span>
+            </div>
+            <div class="boost-icon-btn" onclick="activateBoost('shield')" title="Energy Shield">
+                🛡️
+                <span id="b-shield-count" class="boost-count">0</span>
+                <span>[2]</span>
+            </div>
+            <div class="boost-icon-btn" onclick="activateBoost('coins')" title="Double Coins">
+                🪙2x
+                <span id="b-coins-count" class="boost-count">0</span>
+                <span>[3]</span>
+            </div>
+        </div>
+
+        <!-- Mobile Steering & Flap Controls -->
+        <div id="mobile-controls">
+            <div class="mobile-steering">
+                <div class="steer-btn" id="btn-left">◀</div>
+                <div class="steer-btn" id="btn-right">▶</div>
+            </div>
+            <div class="mobile-flap-btn" id="btn-flap">FLAP</div>
+        </div>
+    </div>
+
+    <!-- Main Menu Modal -->
+    <div id="menu-modal" class="modal-overlay interactive">
+        <div class="modal-card">
+            <h1 class="title">AAS Neon Apex</h1>
+            <p class="subtitle">3D First-Person Flappy Bird AAA Edition. Navigate the cyber conduit, dodge moving obstacles, choose the safe green rings, and unleash boosts!</p>
+            
+            <div class="instruction-grid">
+                <div class="instruction-box">
+                    <div class="instruction-icon">🚀</div>
+                    <div class="instruction-text">
+                        <h4>Flap & Steer</h4>
+                        <p>Space / Click to flap. A / D or Left / Right arrows to steer smoothly.</p>
+                    </div>
+                </div>
+                <div class="instruction-box">
+                    <div class="instruction-icon">🟢🔴</div>
+                    <div class="instruction-text">
+                        <h4>Split Gates</h4>
+                        <p>Fly through Green rings for points. Avoid Red rings—they mean instant death!</p>
+                    </div>
+                </div>
+                <div class="instruction-box">
+                    <div class="instruction-icon">⚡</div>
+                    <div class="instruction-text">
+                        <h4>Boost Armory</h4>
+                        <p>Stock up on Speed, Shield & 2x Coins before launching. Press 1, 2, 3 in-game.</p>
+                    </div>
+                </div>
+                <div class="instruction-box">
+                    <div class="instruction-icon">🎥</div>
+                    <div class="instruction-text">
+                        <h4>Cockpit POV</h4>
+                        <p>Experience ultra-immersive 1st-person flight or toggle 3rd person with [V].</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 16px; width: 100%;">
+                <button class="btn" style="flex: 2; padding: 16px; font-size: 16px;" onclick="startGame()">🚀 Launch Mission</button>
+                <button class="btn btn-secondary" style="flex: 1; padding: 16px; font-size: 16px;" onclick="openShop()">🛍️ Shop & Boosts</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shop Modal -->
+    <div id="shop-modal" class="modal-overlay hidden interactive">
+        <div class="modal-card">
+            <h1 class="title" style="font-size: 32px;">Cyber Armory & Shop</h1>
+            <p class="subtitle">Equip ring themes, unlock 10 world backgrounds, and stock up on consumable boosts!</p>
+            
+            <div class="shop-tabs">
+                <button class="tab-btn active" onclick="switchShopTab('rings')" id="tab-rings">🎨 Ring Themes</button>
+                <button class="tab-btn" onclick="switchShopTab('worlds')" id="tab-worlds">🌌 Worlds (10)</button>
+                <button class="tab-btn" onclick="switchShopTab('boosts')" id="tab-boosts">⚡ Boosts</button>
+            </div>
+
+            <div id="shop-content" class="shop-grid"></div>
+
+            <button class="btn btn-secondary" style="width: 100%; padding: 14px;" onclick="closeShop()">Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- Pause Modal -->
+    <div id="pause-modal" class="modal-overlay hidden interactive">
+        <div class="modal-card" style="max-width: 450px;">
+            <h1 class="title" style="font-size: 32px;">Game Paused</h1>
+            <p class="subtitle">Take a breather, pilot.</p>
+            <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                <button class="btn" style="padding: 14px;" onclick="togglePause()">Resume Flight</button>
+                <button class="btn btn-secondary" style="padding: 14px;" onclick="returnToMenu()">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameover-modal" class="modal-overlay hidden interactive">
+        <div class="modal-card" style="max-width: 500px;">
+            <h1 class="title" style="font-size: 36px; color: #ff007f; -webkit-text-fill-color: #ff007f;">Crash Detected</h1>
+            <p class="subtitle" style="font-size: 16px; color: #fff; margin-bottom: 20px;">Your luck might be better next time! 😜🍀</p>
+            
+            <div class="stats-banner">
+                <div class="stat-box">
+                    <span class="stat-label">Final Score</span>
+                    <span id="go-score" class="stat-val">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Coins Earned</span>
+                    <span id="go-coins" class="stat-val coin-val">+0</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; width: 100%;">
+                <button class="btn" style="flex: 1; padding: 16px;" onclick="startGame()">🔄 Retry Flight</button>
+                <button class="btn btn-secondary" style="flex: 1; padding: 16px;" onclick="returnToMenu()">🏠 Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let audioCtx = null;
+        function initAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        function playSound(type) {
+            if (!audioCtx) return;
+            try {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                let now = audioCtx.currentTime;
+
+                if (type === 'flap') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.15);
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                } else if (type === 'score') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(587.33, now);
+                    osc.frequency.setValueAtTime(880, now + 0.08);
+                    gain.gain.setValueAtTime(0.25, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'crash') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, now);
+                    osc.frequency.linearRampToValueAtTime(40, now + 0.5);
+                    gain.gain.setValueAtTime(0.4, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.5);
+                    osc.start(now);
+                    osc.stop(now + 0.5);
+                } else if (type === 'buy') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                } else if (type === 'boost') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                }
+            } catch(e) {}
+        }
+
+        let gameData = {
+            coins: 500,
+            bestScore: 0,
+            equippedRing: 'cyan',
+            unlockedRings: ['cyan'],
+            equippedWorld: 1,
+            unlockedWorlds: [1],
+            boosts: { speed: 3, shield: 2, coins: 2 }
+        };
+
+        function saveGame() {
+            localStorage.setItem('aas_neon_apex_save', JSON.stringify(gameData));
+        }
+        function loadGame() {
+            let saved = localStorage.getItem('aas_neon_apex_save');
+            if (saved) {
+                try { gameData = JSON.parse(saved); } catch(e){}
+            }
+        }
+        loadGame();
+
+        const ringThemes = [
+            { id: 'cyan', name: 'Cyber Cyan & Gold', price: 0, color: 0x00f2fe },
+            { id: 'pink', name: 'Hot Neon Pink', price: 150, color: 0xff007f },
+            { id: 'lime', name: 'Electric Lime', price: 300, color: 0x00ff66 },
+            { id: 'amber', name: 'Cyberpunk Amber', price: 450, color: 0xffaa00 },
+            { id: 'violet', name: 'Royal Violet', price: 600, color: 0x9900ff },
+            { id: 'crimson', name: 'Inferno Crimson', price: 800, color: 0xff2200 },
+            { id: 'rainbow', name: 'Prism Rainbow', price: 1200, color: 0xff00ff }
+        ];
+
+        const worldThemes = [
+            { id: 1, name: 'T1: Cyber Grid Void', price: 0, fog: 0x050510, bg: 0x020208, grid: 0x00ffff, sun: 0x00f2fe },
+            { id: 2, name: 'T2: Crimson Nebula', price: 100, fog: 0x150205, bg: 0x080103, grid: 0xff0055, sun: 0xff3366 },
+            { id: 3, name: 'T3: Midnight Aurora', price: 200, fog: 0x021015, bg: 0x010508, grid: 0x00ffaa, sun: 0x00ffcc },
+            { id: 4, name: 'T4: Sunset Synthwave', price: 300, fog: 0x150a15, bg: 0x080308, grid: 0xff00ff, sun: 0xffaa00 },
+            { id: 5, name: 'T5: Emerald Matrix', price: 400, fog: 0x021505, bg: 0x010802, grid: 0x00ff00, sun: 0x66ff00 },
+            { id: 6, name: 'T6: Solar Flare Desert', price: 500, fog: 0x150d02, bg: 0x080501, grid: 0xff8800, sun: 0xffcc00 },
+            { id: 7, name: 'T7: Deep Ocean Abyss', price: 600, fog: 0x020a15, bg: 0x010308, grid: 0x0066ff, sun: 0x00ccff },
+            { id: 8, name: 'T8: Violet Supernova', price: 700, fog: 0x100215, bg: 0x050108, grid: 0xd400ff, sun: 0xff00aa },
+            { id: 9, name: 'T9: Neon Tokyo City', price: 800, fog: 0x101015, bg: 0x06060a, grid: 0x00ffff, sun: 0xff0055 },
+            { id: 10, name: 'T10: Celestial God Rays', price: 1000, fog: 0x151515, bg: 0x080808, grid: 0xffffff, sun: 0xffd700 }
+        ];
+
+        const boostItems = [
+            { id: 'speed', name: 'Speed Surge (x3)', desc: 'Instant forward burst', price: 50 },
+            { id: 'shield', name: 'Energy Shield (x3)', desc: 'Absorbs one crash/red ring', price: 75 },
+            { id: 'coins', name: 'Double Coins (x3)', desc: 'Multiplies coins by 2x', price: 100 }
+        ];
+
+        let currentShopTab = 'rings';
+        function switchShopTab(tab) {
+            currentShopTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            renderShop();
+        }
+
+        function renderShop() {
+            let container = document.getElementById('shop-content');
+            container.innerHTML = '';
+
+            if (currentShopTab === 'rings') {
+                ringThemes.forEach(r => {
+                    let owned = gameData.unlockedRings.includes(r.id);
+                    let equipped = gameData.equippedRing === r.id;
+                    let card = document.createElement('div');
+                    card.className = `shop-card ${owned ? 'owned' : ''} ${equipped ? 'equipped' : ''}`;
+                    card.innerHTML = `
+                        <div>
+                            <div class="shop-title">${r.name}</div>
+                            <div class="shop-desc">Neon Glow Theme</div>
+                        </div>
+                        <div>
+                            <div class="shop-price">${owned ? (equipped ? 'EQUIPPED' : 'OWNED') : '🪙 ' + r.price}</div>
+                            <button class="btn ${owned ? 'btn-secondary' : ''}" style="padding: 8px 14px; font-size: 11px;" onclick="${owned ? `equipRing('${r.id}')` : `buyRing('${r.id}', ${r.price})`}">${owned ? (equipped ? 'Active' : 'Equip') : 'Unlock'}</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } else if (currentShopTab === 'worlds') {
+                worldThemes.forEach(w => {
+                    let owned = gameData.unlockedWorlds.includes(w.id);
+                    let equipped = gameData.equippedWorld === w.id;
+                    let card = document.createElement('div');
+                    card.className = `shop-card ${owned ? 'owned' : ''} ${equipped ? 'equipped' : ''}`;
+                    card.innerHTML = `
+                        <div>
+                            <div class="shop-title">${w.name}</div>
+                            <div class="shop-desc">Atmospheric Skybox & Grid</div>
+                        </div>
+                        <div>
+                            <div class="shop-price">${owned ? (equipped ? 'EQUIPPED' : 'OWNED') : '🪙 ' + w.price}</div>
+                            <button class="btn ${owned ? 'btn-secondary' : ''}" style="padding: 8px 14px; font-size: 11px;" onclick="${owned ? `equipWorld(${w.id})` : `buyWorld(${w.id}, ${w.price})`}">${owned ? (equipped ? 'Active' : 'Equip') : 'Unlock'}</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } else if (currentShopTab === 'boosts') {
+                boostItems.forEach(b => {
+                    let card = document.createElement('div');
+                    card.className = 'shop-card';
+                    card.innerHTML = `
+                        <div>
+                            <div class="shop-title">${b.name}</div>
+                            <div class="shop-desc">${b.desc} (Owned: ${gameData.boosts[b.id]})</div>
+                        </div>
+                        <div>
+                            <div class="shop-price">🪙 ${b.price}</div>
+                            <button class="btn" style="padding: 8px 14px; font-size: 11px;" onclick="buyBoost('${b.id}', ${b.price})">+3 Pack</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+            updateHUD();
+        }
+
+        function buyRing(id, price) {
+            initAudio();
+            if (gameData.coins >= price) {
+                gameData.coins -= price;
+                gameData.unlockedRings.push(id);
+                gameData.equippedRing = id;
+                playSound('buy');
+                saveGame();
+                renderShop();
+                updateWorldTheme();
+            } else { alert('Not enough coins!'); }
+        }
+        function equipRing(id) {
+            gameData.equippedRing = id;
+            saveGame();
+            renderShop();
+            updateWorldTheme();
+        }
+
+        function buyWorld(id, price) {
+            initAudio();
+            if (gameData.coins >= price) {
+                gameData.coins -= price;
+                gameData.unlockedWorlds.push(id);
+                gameData.equippedWorld = id;
+                playSound('buy');
+                saveGame();
+                renderShop();
+                updateWorldTheme();
+            } else { alert('Not enough coins!'); }
+        }
+        function equipWorld(id) {
+            gameData.equippedWorld = id;
+            saveGame();
+            renderShop();
+            updateWorldTheme();
+        }
+
+        function buyBoost(id, price) {
+            initAudio();
+            if (gameData.coins >= price) {
+                gameData.coins -= price;
+                gameData.boosts[id] += 3;
+                playSound('buy');
+                saveGame();
+                renderShop();
+            } else { alert('Not enough coins!'); }
+        }
+
+        function updateHUD() {
+            document.getElementById('coin-val').innerText = gameData.coins;
+            document.getElementById('best-val').innerText = gameData.bestScore;
+            document.getElementById('b-speed-count').innerText = gameData.boosts.speed;
+            document.getElementById('b-shield-count').innerText = gameData.boosts.shield;
+            document.getElementById('b-coins-count').innerText = gameData.boosts.coins;
+        }
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(105, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0x00f2fe, 1.5);
+        dirLight.position.set(0, 50, 20);
+        scene.add(dirLight);
+
+        let currentWorldConfig = worldThemes[0];
+        let gridHelper;
+        function updateWorldTheme() {
+            let worldId = gameData.equippedWorld;
+            currentWorldConfig = worldThemes.find(w => w.id === worldId) || worldThemes[0];
+            scene.background = new THREE.Color(currentWorldConfig.bg);
+            scene.fog = new THREE.FogExp2(currentWorldConfig.fog, 0.015);
+            dirLight.color.setHex(currentWorldConfig.sun);
+
+            if (gridHelper) scene.remove(gridHelper);
+            gridHelper = new THREE.GridHelper(1000, 100, currentWorldConfig.grid, currentWorldConfig.grid);
+            gridHelper.position.y = -15;
+            scene.add(gridHelper);
+        }
+        updateWorldTheme();
+
+        let gameState = 'MENU';
+        let score = 0;
+        let sessionCoins = 0;
+        let flightDistance = 0;
+        const totalFlightLength = 1000;
+
+        let shipPos = { x: 0, y: 0, z: 0 };
+        let shipVelocityY = 0;
+        let shipVelocityX = 0;
+        const gravity = -0.55;
+        const flapPower = 0.32;
+        const forwardSpeed = 12.5;
+        let isFirstPerson = true;
+
+        let activeBoosts = { speed: false, shield: false, coins: false };
+        let boostTimers = { speed: 0, shield: 0, coins: 0 };
+
+        let keys = { left: false, right: false };
+        window.addEventListener('keydown', (e) => {
+            initAudio();
+            if (e.code === 'Space' || e.code === 'ArrowUp') { triggerFlap(); e.preventDefault(); }
+            if (e.code === 'KeyA' || e.code === 'ArrowLeft') keys.left = true;
+            if (e.code === 'KeyD' || e.code === 'ArrowRight') keys.right = true;
+            if (e.code === 'KeyV') togglePOV();
+            if (e.code === 'KeyP' || e.code === 'Escape') togglePause();
+            if (e.code === 'Digit1') activateBoost('speed');
+            if (e.code === 'Digit2') activateBoost('shield');
+            if (e.code === 'Digit3') activateBoost('coins');
+        });
+        window.addEventListener('keyup', (e) => {
+            if (e.code === 'KeyA' || e.code === 'ArrowLeft') keys.left = false;
+            if (e.code === 'KeyD' || e.code === 'ArrowRight') keys.right = false;
+        });
+
+        document.getElementById('btn-left').addEventListener('touchstart', (e) => { keys.left = true; e.preventDefault(); });
+        document.getElementById('btn-left').addEventListener('touchend', (e) => { keys.left = false; e.preventDefault(); });
+        document.getElementById('btn-right').addEventListener('touchstart', (e) => { keys.right = true; e.preventDefault(); });
+        document.getElementById('btn-right').addEventListener('touchend', (e) => { keys.right = false; e.preventDefault(); });
+        document.getElementById('btn-flap').addEventListener('touchstart', (e) => { triggerFlap(); e.preventDefault(); });
+        window.addEventListener('pointerdown', (e) => {
+            if (gameState === 'PLAYING' && e.target.tagName === 'CANVAS') triggerFlap();
+        });
+
+        function triggerFlap() {
+            if (gameState !== 'PLAYING') return;
+            shipVelocityY = flapPower;
+            playSound('flap');
+        }
+
+        function togglePOV() {
+            isFirstPerson = !isFirstPerson;
+            document.getElementById('pov-btn').innerText = isFirstPerson ? '🎥 1st Person' : '🦅 3rd Person';
+        }
+
+        function togglePause() {
+            if (gameState === 'PLAYING') {
+                gameState = 'PAUSED';
+                document.getElementById('pause-modal').classList.remove('hidden');
+            } else if (gameState === 'PAUSED') {
+                gameState = 'PLAYING';
+                document.getElementById('pause-modal').classList.add('hidden');
+            }
+        }
+
+        function activateBoost(type) {
+            if (gameState !== 'PLAYING') return;
+            if (gameData.boosts[type] > 0 && !activeBoosts[type]) {
+                gameData.boosts[type]--;
+                activeBoosts[type] = true;
+                boostTimers[type] = 300;
+                playSound('boost');
+                updateHUD();
+            }
+        }
+
+        let rings = [];
+        const ringGeometry = new THREE.TorusGeometry(3.2, 0.35, 16, 64);
+        
+        function generateCourse() {
+            rings.forEach(r => scene.remove(r.mesh));
+            rings = [];
+
+            let currentZ = -30;
+            for (let i = 0; i < totalFlightLength; i++) {
+                currentZ -= 25;
+                let isMoving = i > 10 && Math.random() < 0.35;
+                let isChoice = i > 15 && Math.random() < 0.3;
+
+                let activeRingTheme = ringThemes.find(r => r.id === gameData.equippedRing) || ringThemes[0];
+                let themeColor = activeRingTheme.color;
+
+                if (isChoice) {
+                    let leftRed = Math.random() < 0.5;
+                    
+                    let matL = new THREE.MeshStandardMaterial({ 
+                        color: leftRed ? 0xff0033 : 0x00ff55, 
+                        emissive: leftRed ? 0xff0033 : 0x00ff55, 
+                        emissiveIntensity: 0.8, roughness: 0.2 
+                    });
+                    let meshL = new THREE.Mesh(ringGeometry, matL);
+                    meshL.position.set(-6, (Math.random() - 0.5) * 6, currentZ);
+                    scene.add(meshL);
+                    rings.push({ mesh: meshL, x: -6, y: meshL.position.y, z: currentZ, radius: 3.2, passed: false, isMoving: false, isChoice: true, isRed: leftRed });
+
+                    let matR = new THREE.MeshStandardMaterial({ 
+                        color: !leftRed ? 0xff0033 : 0x00ff55, 
+                        emissive: !leftRed ? 0xff0033 : 0x00ff55, 
+                        emissiveIntensity: 0.8, roughness: 0.2 
+                    });
+                    let meshR = new THREE.Mesh(ringGeometry, matR);
+                    meshR.position.set(6, (Math.random() - 0.5) * 6, currentZ);
+                    scene.add(meshR);
+                    rings.push({ mesh: meshR, x: 6, y: meshR.position.y, z: currentZ, radius: 3.2, passed: false, isMoving: false, isChoice: true, isRed: !leftRed });
+                } else {
+                    let mat = new THREE.MeshStandardMaterial({ 
+                        color: themeColor, emissive: themeColor, emissiveIntensity: 0.6, roughness: 0.2 
+                    });
+                    let mesh = new THREE.Mesh(ringGeometry, mat);
+                    let posX = (Math.random() - 0.5) * 12;
+                    let posY = (Math.random() - 0.5) * 8;
+                    mesh.position.set(posX, posY, currentZ);
+                    scene.add(mesh);
+
+                    rings.push({ 
+                        mesh: mesh, x: posX, y: posY, z: currentZ, radius: 3.2, passed: false, 
+                        isMoving: isMoving, moveOffset: Math.random() * Math.PI * 2, moveSpeed: 0.02 + Math.random() * 0.03,
+                        isChoice: false, isRed: false
+                    });
+                }
+            }
+        }
+
+        function startGame() {
+            initAudio();
+            document.getElementById('menu-modal').classList.add('hidden');
+            document.getElementById('gameover-modal').classList.add('hidden');
+            document.getElementById('pause-modal').classList.add('hidden');
+
+            score = 0;
+            sessionCoins = 0;
+            flightDistance = 0;
+            shipPos = { x: 0, y: 0, z: 0 };
+            shipVelocityY = 0;
+            shipVelocityX = 0;
+            activeBoosts = { speed: false, shield: false, coins: false };
+            
+            document.getElementById('score-val').innerText = '0';
+            generateCourse();
+            gameState = 'PLAYING';
+        }
+
+        function returnToMenu() {
+            gameState = 'MENU';
+            document.getElementById('pause-modal').classList.add('hidden');
+            document.getElementById('gameover-modal').classList.add('hidden');
+            document.getElementById('menu-modal').classList.remove('hidden');
+        }
+
+        function triggerGameOver() {
+            gameState = 'GAMEOVER';
+            playSound('crash');
+
+            let finalCoins = sessionCoins * (activeBoosts.coins ? 2 : 1);
+            gameData.coins += finalCoins;
+            if (score > gameData.bestScore) gameData.bestScore = score;
+            saveGame();
+            updateHUD();
+
+            document.getElementById('go-score').innerText = score;
+            document.getElementById('go-coins').innerText = '+' + finalCoins;
+            document.getElementById('gameover-modal').classList.remove('hidden');
+        }
+
+        function openShop() {
+            document.getElementById('shop-modal').classList.remove('hidden');
+            renderShop();
+        }
+        function closeShop() {
+            document.getElementById('shop-modal').classList.add('hidden');
+        }
+
+        let clock = new THREE.Clock();
+        let tumbleAngle = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            let dt = clock.getDelta();
+
+            if (gameState === 'PLAYING') {
+                let currentSpeed = forwardSpeed;
+                if (activeBoosts.speed) {
+                    currentSpeed *= 1.8;
+                    boostTimers.speed--;
+                    if (boostTimers.speed <= 0) activeBoosts.speed = false;
+                }
+                if (activeBoosts.shield) {
+                    boostTimers.shield--;
+                    if (boostTimers.shield <= 0) activeBoosts.shield = false;
+                }
+                if (activeBoosts.coins) {
+                    boostTimers.coins--;
+                    if (boostTimers.coins <= 0) activeBoosts.coins = false;
+                }
+
+                shipPos.z -= currentSpeed * dt * 3.5;
+                flightDistance += currentSpeed * dt * 3.5;
+
+                let pct = Math.min(100, Math.floor((Math.abs(shipPos.z) / (totalFlightLength * 25)) * 100));
+                document.getElementById('progress-bar').style.width = pct + '%';
+                document.getElementById('progress-pct').innerText = pct + '%';
+
+                let steerRate = 14.0 * dt;
+                if (keys.left) {
+                    shipVelocityX -= steerRate;
+                } else if (keys.right) {
+                    shipVelocityX += steerRate;
+                } else {
+                    shipVelocityX *= 0.85;
+                }
+                shipVelocityX = Math.max(-6, Math.min(6, shipVelocityX));
+                shipPos.x += shipVelocityX * dt * 10;
+                shipPos.x = Math.max(-18, Math.min(18, shipPos.x));
+
+                shipVelocityY += gravity * dt;
+                shipPos.y += shipVelocityY;
+
+                if (shipPos.y < -14.5) {
+                    if (activeBoosts.shield) {
+                        activeBoosts.shield = false;
+                        shipPos.y = -13;
+                        shipVelocityY = 0.4;
+                    } else {
+                        triggerGameOver();
+                    }
+                }
+
+                let time = Date.now() * 0.003;
+                rings.forEach(r => {
+                    if (r.isMoving) {
+                        r.mesh.position.x = r.x + Math.sin(time * r.moveSpeed * 50 + r.moveOffset) * 4;
+                    }
+
+                    if (!r.passed && r.mesh.position.z > shipPos.z + 2) {
+                        r.passed = true;
+                        let dist = Math.hypot(shipPos.x - r.mesh.position.x, shipPos.y - r.mesh.position.y);
+                        
+                        if (dist < r.radius + 1.2) {
+                            if (r.isChoice && r.isRed) {
+                                if (activeBoosts.shield) {
+                                    activeBoosts.shield = false;
+                                } else {
+                                    triggerGameOver();
+                                }
+                            } else {
+                                score += r.isChoice ? 2 : 1;
+                                sessionCoins += r.isChoice ? 2 : 1;
+                                document.getElementById('score-val').innerText = score;
+                                updateHUD();
+                                playSound('score');
+                            }
+                        }
+                    }
+                });
+
+                if (isFirstPerson) {
+                    camera.position.set(shipPos.x, shipPos.y + 0.5, shipPos.z + 1.5);
+                    camera.lookAt(shipPos.x + shipVelocityX * 0.2, shipPos.y + shipVelocityY * 0.5, shipPos.z - 50);
+                } else {
+                    camera.position.set(shipPos.x, shipPos.y + 4, shipPos.z + 10);
+                    camera.lookAt(shipPos.x, shipPos.y, shipPos.z - 20);
+                }
+
+            } else if (gameState === 'GAMEOVER') {
+                tumbleAngle += 0.05;
+                shipPos.y = Math.max(-14.5, shipPos.y - 0.3);
+                camera.position.set(shipPos.x + Math.sin(tumbleAngle)*3, shipPos.y + 2, shipPos.z + 6);
+                camera.lookAt(shipPos.x, shipPos.y, shipPos.z - 5);
+                camera.rotation.z = tumbleAngle * 2;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        renderShop();
+        updateHUD();
+        animate();
+    </script>
+</body>
+</html>
